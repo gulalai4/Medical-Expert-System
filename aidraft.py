@@ -1,0 +1,126 @@
+import tkinter as tk
+from tkinter import messagebox
+
+def diagnose_symptoms(symptoms):
+    fever = symptoms.get('fever', False)
+    cough = symptoms.get('cough', False)
+    sore_throat = symptoms.get('sore_throat', False)
+    conjunctivitis = symptoms.get('conjunctivitis', False)
+    body_ache = symptoms.get('body_ache', False)
+    headache = symptoms.get('headache', False)
+    runny_nose = symptoms.get('runny_nose', False)
+    rash = symptoms.get('rash', False)
+    itching_skin = symptoms.get('itching_skin', False)
+    general_weakness = symptoms.get('general_weakness', False)
+    sneezing = symptoms.get('sneezing', False)
+    swollen_salivary_glands = symptoms.get('swollen_salivary_glands', False)
+    dry_mouth = symptoms.get('dry_mouth', False)
+    vomiting = symptoms.get('vomiting', False)
+    enlarged_lymph_nodes = symptoms.get('enlarged_lymph_nodes', False)
+    slurred_speech = symptoms.get('slurred_speech', False)
+    difficulty_breathing_or_swallowing = symptoms.get('difficulty_breathing_or_swallowing', False)
+    skin_lesion = symptoms.get('skin_lesion', False)
+    myalgia = symptoms.get('myalgia', False)
+    rose_colored_spot = symptoms.get('rose_colored_spot', False)
+    chest_pain = symptoms.get('chest_pain', False)
+    paleness = symptoms.get('paleness', False)
+    low_blood_pressure = symptoms.get('low_blood_pressure', False)
+    double_vision = symptoms.get('double_vision', False)
+
+    # Basic logic for demonstration purposes
+    if fever and cough and sore_throat:
+        return "You may have a respiratory infection. Consult with a healthcare professional for further evaluation."
+
+    elif fever and cough and conjunctivitis:
+        return "The symptoms may suggest a viral infection, possibly measles. Please see a doctor for a proper diagnosis and treatment."
+
+    elif fever and cough and body_ache and headache and runny_nose:
+        return "These symptoms are indicative of the flu. It is recommended to rest, stay hydrated, and take over-the-counter flu medication."
+
+    elif runny_nose and cough and headache and sore_throat:
+        return "You might be experiencing a common cold. Rest, drink fluids, and consider over-the-counter cold remedies."
+
+    elif fever and swollen_salivary_glands and dry_mouth:
+        return "The symptoms may point to mumps. Seek medical attention for proper diagnosis and management."
+
+    elif rash and itching_skin and general_weakness:
+        return "The presence of rash, itching, and general weakness could indicate chickenpox. Seek medical attention for appropriate care and isolation."
+
+    elif cough and sneezing and runny_nose:
+        return "These symptoms are suggestive of whooping cough. Consult with a healthcare professional for proper diagnosis and treatment."
+
+    elif fever and rash and body_ache and vomiting and headache:
+        return "The symptoms may indicate meningitis. Urgent medical attention is required."
+
+    elif fever and enlarged_lymph_nodes and slurred_speech and difficulty_breathing_or_swallowing and skin_lesion:
+        return "These symptoms may suggest diphtheria. Seek immediate medical attention."
+
+    elif fever and cough and headache and myalgia:
+        return "These symptoms are common in influenza (flu). Rest, stay hydrated, and consider over-the-counter flu medication."
+
+    elif fever and rash and rose_colored_spot and general_weakness and headache:
+        return "The symptoms may be consistent with typhoid fever. Urgent medical attention is required."
+
+    elif chest_pain and paleness and low_blood_pressure and general_weakness and difficulty_breathing_or_swallowing:
+        return "These symptoms could be indicative of anemia. Consult with a healthcare professional for further evaluation."
+
+    elif not any(symptoms.values()):
+        return "No symptoms provided. Please select at least one symptom for diagnosis."
+
+    else:
+        return "No specific diagnosis found based on provided symptoms. If symptoms persist or worsen, consult with a healthcare professional for a thorough evaluation."
+
+class MedicalDiagnosisApp:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("Medical Diagnosis Expert System")
+
+        self.symptoms = {
+            'fever': tk.BooleanVar(),
+            'runny_nose': tk.BooleanVar(),
+            'cough': tk.BooleanVar(),
+            'sore_throat': tk.BooleanVar(),
+            'conjunctivitis': tk.BooleanVar(),
+            'body_ache': tk.BooleanVar(),
+            'headache': tk.BooleanVar(),
+            'sneezing': tk.BooleanVar(),
+            'rash': tk.BooleanVar(),
+            'itching_skin': tk.BooleanVar(),
+            'general_weakness': tk.BooleanVar(),
+            'rose_colored_spot': tk.BooleanVar(),
+            'swollen_salivary_glands': tk.BooleanVar(),
+            'dry_mouth': tk.BooleanVar(),
+            'vomiting': tk.BooleanVar(),
+            'enlarged_lymph_nodes': tk.BooleanVar(),
+            'slurred_speech': tk.BooleanVar(),
+            'difficulty_breathing_or_swallowing': tk.BooleanVar(),
+            'skin_lesion': tk.BooleanVar(),
+            'myalgia': tk.BooleanVar(),
+            'double_vision': tk.BooleanVar(),
+            'chest_pain': tk.BooleanVar(),
+            'paleness': tk.BooleanVar(),
+            'low_blood_pressure': tk.BooleanVar(),
+        }
+
+        self.create_widgets()
+
+    def create_widgets(self):
+        tk.Label(self.master, text="Medical Diagnosis Expert System", font=("Helvetica", 16)).pack(pady=10)
+
+        self.create_input_widgets()
+        diagnose_button = tk.Button(self.master, text="Diagnose", command=self.diagnose)
+        diagnose_button.pack(pady=10)
+
+        # Diagnosis result label
+        self.result_label = tk.Label(self.master, text="", font=("Helvetica", 12), wraplength=400)
+        self.result_label.pack(pady=10)
+
+    def create_input_widgets(self):
+        tk.Label(self.master, text="Please indicate your symptoms:").pack(pady=5)
+
+        for symptom, var in self.symptoms.items():
+            tk.Checkbutton(self.master, text=symptom.replace('_', ' ').title(), variable=var).pack(anchor='w', padx=10)
+
+    def get_user_input(self):
+        user_symptoms = {symptom: var.get() for symptom, var in self.symptoms.items()}
+        return user
